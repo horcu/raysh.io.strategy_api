@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "raysh.io.strategy_api.fullname" . }}
+  name: {{ include "raysh.io.strategy-api.fullname" . }}
   labels:
-    {{- include "raysh.io.strategy_api.labels" . | nindent 4 }}
+    {{- include "raysh.io.strategy-api.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "raysh.io.strategy_api.selectorLabels" . | nindent 6 }}
+      {{- include "raysh.io.strategy-api.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "raysh.io.strategy_api.selectorLabels" . | nindent 8 }}
+        {{- include "raysh.io.strategy-api.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "raysh.io.strategy_api.serviceAccountName" . }}
+      serviceAccountName: {{ include "raysh.io.strategy-api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
