@@ -5,7 +5,9 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
-
+ <PropertyGroup>
+  <ProjectGuid>8d10ded4-5f68-11ea-bc55-1242ac132303</ProjectGuid>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Alpaca.Markets" Version="3.5.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
