@@ -4,7 +4,7 @@ build:
   context: .
   dockerfile: Dockerfile
 install:
-  chart: charts/rayshiostrategyapi
+  chart: charts/raysh.io.strategy_api
   values:
   - values.dev.yaml?
   - secrets.dev.yaml?
@@ -20,7 +20,7 @@ install:
     #   - name: myRegistryKeySecretName
     replicaCount: 1
     image:
-      repository: rayshiostrategyapi
+      repository: raysh.io.strategy_api
       tag: $(tag)
       pullPolicy: Never
     ingress:
@@ -30,7 +30,7 @@ install:
       # This expands to form the service's public URL: [space.s.][rootSpace.]rayshiostrategyapi.<random suffix>.<region>.azds.io
       # Customize the public URL by changing the 'rayshiostrategyapi' text between the $(rootSpacePrefix) and $(hostSuffix) tokens
       # For more information see https://aka.ms/devspaces/routing
-      - $(spacePrefix)$(rootSpacePrefix)rayshiostrategyapi$(hostSuffix)
+      - $(spacePrefix)$(rootSpacePrefix)raysh.io.strategy_api$(hostSuffix)
 configurations:
   develop:
     build:
