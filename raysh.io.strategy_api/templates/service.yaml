@@ -1,12 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "rayshiostrategyapi.fullname" . }}
+  name: {{ include "raysh.io.strategy_api.fullname" . }}
   labels:
-    app: {{ template "rayshiostrategyapi.name" . }}
-    chart: {{ template "rayshiostrategyapi.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    {{- include "raysh.io.strategy_api.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,5 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "rayshiostrategyapi.name" . }}
-    release: {{ .Release.Name }}
+    {{- include "raysh.io.strategy_api.selectorLabels" . | nindent 4 }}
