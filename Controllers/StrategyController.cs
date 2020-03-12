@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
-using raysh.io.core.enums;
+using raysh.io.strategy_api.enums;
 
 namespace raysh.io.strategy_api.Controllers
 {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using raysh.io.core.enums;
+﻿using raysh.io.strategy_api.enums;
 
-namespace raysh.io.core.Interfaces
+namespace raysh.io.strategy_api.Interfaces
 {
     public interface ISecurityStrategyObject
     {

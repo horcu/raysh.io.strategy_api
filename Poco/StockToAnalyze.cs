@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using raysh.io.core.enums;
-using raysh.io.core.Interfaces;
+﻿using raysh.io.strategy_api.Interfaces;
 
-namespace raysh.io.core.Poco
+namespace raysh.io.strategy_api.Poco
 {
     public class StockToAnalyze : IStockToAnalyze
     {

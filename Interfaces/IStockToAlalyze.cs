@@ -1,6 +1,4 @@
-﻿using raysh.io.core.enums;
-
-namespace raysh.io.core.Interfaces
+﻿namespace raysh.io.strategy_api.Interfaces
 {
     public interface IStockToAnalyze
     {

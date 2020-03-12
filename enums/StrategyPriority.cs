@@ -1,4 +1,4 @@
-﻿namespace raysh.io.core.enums
+﻿namespace raysh.io.strategy_api.enums
 {
     public enum StrategyPriority
     {
