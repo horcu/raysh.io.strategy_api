@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "raysh.io.strategy-api.name" -}}
+{{- define "strategyapi.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "raysh.io.strategy-api.fullname" -}}
+{{- define "strategyapi.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "raysh.io.strategy-api.chart" -}}
+{{- define "strategyapi.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "raysh.io.strategy-api.labels" -}}
-helm.sh/chart: {{ include "raysh.io.strategy-api.chart" . }}
-{{ include "raysh.io.strategy-api.selectorLabels" . }}
+{{- define "strategyapi.labels" -}}
+helm.sh/chart: {{ include "strategyapi.chart" . }}
+{{ include "strategyapi.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -46,17 +46,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "raysh.io.strategy-api.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "raysh.io.strategy-api.name" . }}
+{{- define "strategyapi.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "strategyapi.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "raysh.io.strategy-api.serviceAccountName" -}}
+{{- define "strategyapi.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "raysh.io.strategy-api.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "strategyapi.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
