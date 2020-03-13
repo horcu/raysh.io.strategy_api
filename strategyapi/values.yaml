@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: horcu/strategy:%build.number%
+  repository: nginx
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
