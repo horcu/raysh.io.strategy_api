@@ -5,11 +5,11 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: horcu/strategy
   pullPolicy: IfNotPresent
 
 imagePullSecrets: 
--name regcred
+  -name regcred
 nameOverride: ""
 fullnameOverride: ""
 
