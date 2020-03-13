@@ -43,7 +43,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: rayshio-control-plane
+    - host: docker.docker
       paths: []
   tls: []
   #  - secretName: chart-example-tls
