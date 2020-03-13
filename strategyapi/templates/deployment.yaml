@@ -26,8 +26,6 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}"
-      imagePullSecrets:
-        - name: regcred
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
