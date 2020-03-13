@@ -8,7 +8,7 @@ image:
   repository: horcu/strategy:%build.number%
   pullPolicy: IfNotPresent
 
-  imagePullSecrets:
+imagePullSecrets:
   - name: regcred
 nameOverride: ""
 fullnameOverride: ""
