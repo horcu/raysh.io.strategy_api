@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/Strategy",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/Strategy",
       "publishAllPorts": true
     },
     "Azure Dev Spaces": {

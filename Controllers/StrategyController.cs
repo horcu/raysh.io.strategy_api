@@ -11,12 +11,7 @@ namespace raysh.io.strategy_api.Controllers
     [ApiController]
     public class StrategyController : ControllerBase
     {
-        public StrategyController(IModel _channel) 
-        {
-            this._channel = _channel;
-               
-        }
-                private IModel _channel { get; set; }
+        private IModel _channel { get; set; }
 
         // GET api/values
         [HttpGet]
