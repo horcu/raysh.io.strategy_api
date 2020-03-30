@@ -33,8 +33,12 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /health
+              port: 80
+            failureThreshold: 6
+            timeoutSeconds: 5
+            periodSeconds: 15
+            initialDelaySeconds: 30
           readinessProbe:
             httpGet:
               path: /
