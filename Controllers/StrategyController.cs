@@ -46,7 +46,7 @@ namespace raysh.io.strategy_api.Controllers
             try
             {
                 var body = Encoding.UTF8.GetBytes(content.ToString());
-                   await SetupAndAddToQueue(body);
+                   SetupAndAddToQueue(body);
 
                 return new JsonResult(true);
             }
@@ -56,7 +56,7 @@ namespace raysh.io.strategy_api.Controllers
             }
         }
 
-        private async Task SetupAndAddToQueue(byte [] body)
+        private void SetupAndAddToQueue(byte[] body)
         {
             Connect();
             _channel.BasicPublish(exchange: "",
