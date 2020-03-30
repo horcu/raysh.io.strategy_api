@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using raysh.io.strategy_api.enums;
 
@@ -11,8 +13,16 @@ namespace raysh.io.strategy_api.Controllers
     [ApiController]
     public class StrategyController : ControllerBase
     {
-        private IModel _channel { get; set; }
+        public CancellationToken Token { get; set; }
+        private IConnection _connection;
+        private IModel _channel; 
+        private IConfiguration _config;
 
+
+        public StrategyController(IConfiguration config)
+        {
+            this._config = config;
+        }
         // GET api/values
         [HttpGet]
         public async Task<JsonResult> Get(string symbol)
@@ -40,7 +50,7 @@ namespace raysh.io.strategy_api.Controllers
 
                 return new JsonResult(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new JsonResult(false);
             }
@@ -48,15 +58,35 @@ namespace raysh.io.strategy_api.Controllers
 
         private async Task SetupAndAddToQueue(byte [] body)
         {
-            var factory = new ConnectionFactory() {HostName = "localhost"};
-            using var connection = factory.CreateConnection();
-            using (await Task.FromResult(_channel = connection.CreateModel()))
-            {
-                 _channel.BasicPublish(exchange: "",
-                    routingKey: "strategy-queue",
+            Connect();
+            _channel.BasicPublish(exchange: "",
+                    routingKey: "active-queue",
                     basicProperties: null,
                     body: body);
-            }
+        }
+
+        private  void Connect()
+        {
+             var url = _config.GetValue<string>("connections:svc:rabbit:url");
+                var queueName = _config.GetValue<string>("connections:svc:rabbit:qname");
+                var queueExchange = _config.GetValue<string>("connections:svc:rabbit:exchange");
+                
+                var factory = new ConnectionFactory { Uri = new Uri(url) };
+
+                _connection = factory.CreateConnection();
+                _channel = _connection.CreateModel();
+                _channel.ExchangeDeclare(queueExchange, ExchangeType.Topic);
+                _channel.QueueDeclare(queueName, true, false, false, null);
+                _channel.QueueBind(queueName, queueExchange, "active-*", null);
+                _channel.BasicQos(0, 1, false);
+
+                _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
+               
+        }
+
+        private void RabbitMQ_ConnectionShutdown(object sender, ShutdownEventArgs e)
+        {
+            Console.WriteLine("shutting down the queue");
         }
     }
 }
