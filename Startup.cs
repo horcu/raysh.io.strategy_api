@@ -44,12 +44,13 @@ namespace raysh.io.strategy_api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+               
                 endpoints.MapHealthChecks("/health", new HealthCheckOptions()
                 {
                     AllowCachingResponses = false,
                     ResponseWriter = WriteResponse
                 });
+                endpoints.MapControllers();
             });
         }
 
